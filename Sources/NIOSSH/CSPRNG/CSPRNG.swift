@@ -31,7 +31,7 @@ struct CSPRNG: RandomNumberGenerator {
     private var baseRNG: SystemRandomNumberGenerator
 
     init() {
-        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(Linux) || os(Android)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS) || os(Linux) || os(Android)
         self.baseRNG = SystemRandomNumberGenerator()
         #else
         fatalError("Platform does not have a supported CSPRNG")
