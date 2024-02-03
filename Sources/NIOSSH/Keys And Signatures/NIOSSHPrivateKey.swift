@@ -148,7 +148,7 @@ extension NIOSSHPrivateKey {
         case .custom(let key):
             let signature = try key.signature(for: payload.bytes.readableBytesView)
             return NIOSSHSignature(backingSignature: .custom(signature))
-        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         case .secureEnclaveP256(let key):
             let signature = try key.signature(for: payload.bytes.readableBytesView)
             return NIOSSHSignature(backingSignature: .ecdsaP256(signature))
@@ -171,7 +171,7 @@ public extension NIOSSHPrivateKey {
             return NIOSSHPublicKey(backingKey: .ecdsaP521(privateKey.publicKey))
         case .custom(let privateKey):
             return NIOSSHPublicKey(backingKey: .custom(privateKey.publicKey))
-        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         case .secureEnclaveP256(let privateKey):
             return NIOSSHPublicKey(backingKey: .ecdsaP256(privateKey.publicKey))
         #endif
