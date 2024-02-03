@@ -50,7 +50,7 @@ public struct NIOSSHPrivateKey {
         self.backingKey = .custom(key)
     }
 
-    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+    #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
     public init(secureEnclaveP256Key key: SecureEnclave.P256.Signing.PrivateKey) {
         self.backingKey = .secureEnclaveP256(key)
     }
@@ -86,7 +86,7 @@ extension NIOSSHPrivateKey {
         case ecdsaP521(P521.Signing.PrivateKey)
         case custom(NIOSSHPrivateKeyProtocol)
 
-        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         case secureEnclaveP256(SecureEnclave.P256.Signing.PrivateKey)
         #endif
     }
