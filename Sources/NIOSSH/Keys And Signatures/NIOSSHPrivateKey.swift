@@ -69,7 +69,7 @@ public struct NIOSSHPrivateKey {
             return ["ecdsa-sha2-nistp521"]
         case .custom(let backingKey):
             return [Substring(backingKey.keyPrefix)]
-        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         case .secureEnclaveP256:
             return ["ecdsa-sha2-nistp256"]
         #endif
@@ -121,7 +121,7 @@ extension NIOSSHPrivateKey {
             }
             return NIOSSHSignature(backingSignature: .custom(signature))
 
-        #if canImport(Darwin)
+        #if os(macOS) || os(iOS) || os(watchOS) || os(tvOS)
         case .secureEnclaveP256(let key):
             let signature = try digest.withUnsafeBytes { ptr in
                 try key.signature(for: ptr)
